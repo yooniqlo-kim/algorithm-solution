@@ -1,13 +1,13 @@
 import java.util.*;
 import java.io.*;
 
-public class Main { //클래스 시작
+public class Main { 
 	static int n = 7;
 	static int total = 9;
 	static int[] height = new int[total]; //난쟁이 키
 	static int[] dwarf;
 	static StringBuilder sb = new StringBuilder(100);
-	static int cnt = 0;
+	static boolean isFind;
 	
 	public static void main(String[] args) throws Exception{ 
 		//System.setIn(new FileInputStream("input.txt"));
@@ -27,20 +27,21 @@ public class Main { //클래스 시작
 		
 	}//end main
 	
-	public static void findDwarf(int d, int start) throws Exception{
-		
+	public static void findDwarf(int d, int start){
+		if(isFind) return;
 		if(d == n) { 
+			
 			int sum = 0;
 			for(int i=0; i<n; i++) {
 				sum += dwarf[i];
 			}
 			
-			if(sum == 100 && cnt==0) {
+			if(sum == 100) {
 				Arrays.sort(dwarf);
 				for(int dw : dwarf) {
 					sb.append(dw).append("\n");
 				}
-				cnt ++;
+				isFind = true;
 			}
 			return;
 		}
