@@ -44,7 +44,6 @@ public class Main {
 					}
 				}
 				switchStatus[num-1] = !switchStatus[num-1]; //자기자신 변경
-				break;
 			default:
 				break;
 			}
