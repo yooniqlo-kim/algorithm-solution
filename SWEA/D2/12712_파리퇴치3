@@ -1,0 +1,63 @@
+
+import java.io.*;
+import java.util.*;
+
+public class SWEA_12712_파리퇴치3 {
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder(100);
+		
+		int T = Integer.parseInt(br.readLine().trim());
+		
+		for(int t=0; t<T; t++) {
+			StringTokenizer st = new StringTokenizer(br.readLine().trim());
+			int N = Integer.parseInt(st.nextToken()), M = Integer.parseInt(st.nextToken());
+			int[][] map = new int[N][N];
+			int[] dRow = {0, 0, 1, -1}; //동 서 남 북
+			int[] dCol = {1, -1, 0, 0};
+			int[] dCrossRow = {-1, -1, 1, 1}; //북서 북동 남서 남동
+			int[] dCrossCol = {-1, 1, -1, 1};
+			
+			//배열 초기화
+			for(int i=0; i<N; i++) {
+				st = new StringTokenizer(br.readLine().trim());
+				for(int j=0; j<N; j++) {
+					map[i][j] = Integer.parseInt(st.nextToken());
+				}
+			}
+			int sumMax=0, crossMax=0;
+			for(int i=0; i<N; i++) {
+				for(int j=0; j<N; j++) {
+					int sum = map[i][j], crossSum = map[i][j];
+					
+					for(int m=1; m<M; m++) {
+						for(int k=0; k<4; k++) {
+							int flagR = i + dRow[k] * m;
+							int flagC = j + dCol[k] * m;
+							int flagCrossR = i + dCrossRow[k] * m;
+							int flagCrossC = j + dCrossCol[k] * m;
+							
+							if(flagR >= 0 && flagR < N && flagC >= 0 && flagC < N) {
+								sum += map[flagR][flagC];
+							}
+							
+							if(flagCrossR >= 0 && flagCrossR < N && flagCrossC >= 0 && flagCrossC < N) {
+								crossSum += map[flagCrossR][flagCrossC];
+							}
+						}
+					}
+					sumMax = Math.max(sum, sumMax);
+					crossMax = Math.max(crossMax, crossSum);
+				}
+			}
+			
+			sb.append("#").append(t+1).append(" ").append(Math.max(sumMax, crossMax)).append("\n");
+			
+			
+		}//end testcase
+		bw.write(sb.toString());
+		bw.close();
+		br.close();
+	}//end main
+}
