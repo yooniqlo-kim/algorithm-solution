@@ -8,7 +8,7 @@ public class Main {
 		
 		Stack<Integer> stack = new Stack<Integer>();
 		int N = Integer.parseInt(br.readLine().trim());
-		int max = 0, cnt=1;
+		int cnt=1;
 		
 		for(int i=0; i<N; i++) {
 			stack.push(Integer.parseInt(br.readLine().trim()));
