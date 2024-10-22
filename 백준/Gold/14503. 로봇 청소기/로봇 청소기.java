@@ -49,12 +49,7 @@ public class Main {
 			}
 			
 			if(checkClean(row, col, dir)) { // 청소되지 않은 빈 칸이 없는 경우
-				int tmpD = 0;
-				if(dir==1 || dir==0) {
-					tmpD =dir + 2;
-				} else {
-					tmpD =dir - 2;
-				}
+				int tmpD = (dir+6) % 4;
 				
 				int nr = row + dr[tmpD];
 				int nc = col + dc[tmpD];
@@ -63,18 +58,12 @@ public class Main {
 					queue.offer(new int[] {nr,nc,dir});
 				else
 					break;
-				
-				// 뒤쪽 칸이 벽이 아니라면 후진
-				// 벽이라면 break
 			} else { // 청소되지 않은 빈 칸이 있는 경우
-
-				dir = dir%4-1 < 0 ? 3 : dir%4-1;// 반시계 방향 90도 회전
+				dir = (dir+3) % 4;
 				
 				int nr = row + dr[dir];
 				int nc = col + dc[dir];
-				
-				// 앞 쪽이 청소되지 않은 빈칸이면 한칸 전진
-				// 아니라면 현재 내위치 
+
 				if(nr>=0 && nr<N && nc>=0 && nc<M && room[nr][nc]==0 && !cleaned[nr][nc]) {
 					queue.offer(new int[] {nr,nc,dir});
 				} else
